@@ -6,19 +6,24 @@
         <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
         <link href='https://fonts.googleapis.com/css?family=Poppins:400,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="/css/style.css">
-        <link rel="stylesheet" href="/css/animate.css">
+        <!-- <link rel="stylesheet" href="/css/animate.css"> -->
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script> -->
         <script src="/angular/angular.min.js"></script>
         <script src="/angular-ui-router/release/angular-ui-router.min.js"></script>
         <script src="/angular-resource/angular-resource.min.js"></script>
+        <script src="/satellizer/satellizer.min.js" charset="utf-8"></script>
         <script src="/js/app.js"></script>
+        <script src="/js/controllers/mainController.js"></script>
         <script src="/jquery/dist/jquery.min.js" charset="utf-8"></script>
-        <script src="/js/style.js"></script>
         <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
         </script>
         <base href="/"/>
     </head>
-    <body>
-      <nav><a data-ui-sref="home">Party Playlist</a></nav>
+    <body data-ng-controller="MainController as main">
+      <nav>
+        <a data-ui-sref="home">Party Playlist</a>
+        <button data-ng-click="main.authenticate('facebook')">Sign in with Facebook</button>
+      </nav>
       <div class="container">
         <div data-ui-view></div>
       </div>
