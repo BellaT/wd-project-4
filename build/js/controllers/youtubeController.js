@@ -5,14 +5,13 @@ angular
 YouTubeController.$inject = ["YouTubePlayer"];
 function YouTubeController(YouTubePlayer){
 
-  function onYouTubeIframeAPIReady() {
-    YouTubePlayer.player = new YT.Player('player', {
-      height: '350',
-      width: '425',
-      events: {
-        'onReady': YouTubePlayer.onReady,
-        'onStateChange': YouTubePlayer.onStateChange
-      }
-    });
-  }
+  var self = this;
+  self.playNext = YouTubePlayer.playNext;
+  self.playPrevious = YouTubePlayer.playPrevious;
+
+  YouTubePlayer.setVideos([
+    'de4_vbntd50',
+    'F-mjl63e0ms',
+    '5X-Mrc2l1d0'
+  ]);
 }

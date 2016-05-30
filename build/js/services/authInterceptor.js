@@ -15,7 +15,6 @@ angular
       },
 
       response: function(res){
-        console.log(res);
 
         if (res.config.url.indexOf(API_URL) === 0 && res.data.token) {
           TokenService.setToken(res.data.token);

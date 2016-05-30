@@ -51386,16 +51386,15 @@ angular
 YouTubeController.$inject = ["YouTubePlayer"];
 function YouTubeController(YouTubePlayer){
 
-  function onYouTubeIframeAPIReady() {
-    YouTubePlayer.player = new YT.Player('player', {
-      height: '350',
-      width: '425',
-      events: {
-        'onReady': YouTubePlayer.onReady,
-        'onStateChange': YouTubePlayer.onStateChange
-      }
-    });
-  }
+  var self = this;
+  self.playNext = YouTubePlayer.playNext;
+  self.playPrevious = YouTubePlayer.playPrevious;
+
+  YouTubePlayer.setVideos([
+    'de4_vbntd50',
+    'F-mjl63e0ms',
+    '5X-Mrc2l1d0'
+  ]);
 }
 
 angular
@@ -51441,7 +51440,6 @@ angular
       },
 
       response: function(res){
-        console.log(res);
 
         if (res.config.url.indexOf(API_URL) === 0 && res.data.token) {
           TokenService.setToken(res.data.token);
@@ -51512,20 +51510,18 @@ angular
   .module('party')
   .factory('YouTubePlayer', YouTubePlayer);
 
-function YouTubePlayer() {
+YouTubePlayer.$inject = ["$window"];
+function YouTubePlayer($window) {
+
   var self = this;
+
   self.current = 0;
   self.player = null;
 
-  /**
-  * Tracks ids here...
-  */
-  self.videos = [
-    'de4_vbntd50',
-    'F-mjl63e0ms',
-    '5X-Mrc2l1d0'
-  ];
-  
+  self.setVideos = function(videos){
+    self.videos = videos;
+  };
+
   self.currentlyPlaying = function(){
     return self.videos[self.current];
   };
@@ -51573,4 +51569,17 @@ function YouTubePlayer() {
       self.playNext();
     }
   };
+
+  $window.onYouTubeIframeAPIReady = function() {
+    self.player = new YT.Player('player', {
+      height: '350',
+      width: '425',
+      events: {
+        'onReady': self.onReady,
+        'onStateChange': self.onStateChange
+      }
+    });
+  };
+
+  return self;
 }

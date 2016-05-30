@@ -2,20 +2,18 @@ angular
   .module('party')
   .factory('YouTubePlayer', YouTubePlayer);
 
-function YouTubePlayer() {
+YouTubePlayer.$inject = ["$window"];
+function YouTubePlayer($window) {
+
   var self = this;
+
   self.current = 0;
   self.player = null;
 
-  /**
-  * Tracks ids here...
-  */
-  self.videos = [
-    'de4_vbntd50',
-    'F-mjl63e0ms',
-    '5X-Mrc2l1d0'
-  ];
-  
+  self.setVideos = function(videos){
+    self.videos = videos;
+  };
+
   self.currentlyPlaying = function(){
     return self.videos[self.current];
   };
@@ -63,4 +61,17 @@ function YouTubePlayer() {
       self.playNext();
     }
   };
+
+  $window.onYouTubeIframeAPIReady = function() {
+    self.player = new YT.Player('player', {
+      height: '350',
+      width: '425',
+      events: {
+        'onReady': self.onReady,
+        'onStateChange': self.onStateChange
+      }
+    });
+  };
+
+  return self;
 }
