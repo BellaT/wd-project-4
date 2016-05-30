@@ -1,23 +1,23 @@
 angular
-  .module('logging')
+  .module('party')
   .factory('User', User);
 
-User.$inject = ['$resource', 'API'];
-function User($resource, API){
+User.$inject = ['$resource', 'API_URL'];
+function User($resource, API_URL){
 
   return $resource(
-    API+'/users/:id', {id: '@id'},
+    API_URL+'/users/:id', {id: '@id'},
     { 'get':       { method: 'GET' },
       'save':      { method: 'POST' },
       'query':     { method: 'GET', isArray: false},
       'remove':    { method: 'DELETE' },
       'delete':    { method: 'DELETE' },
       'register': {
-        url: API +'/register',
+        url: API_URL +'/register',
         method: "POST"
       },
       'login': {
-        url: API + '/login',
+        url: API_URL + '/login',
         method: "POST"
       }
     }

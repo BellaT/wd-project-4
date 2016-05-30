@@ -1,5 +1,5 @@
 angular
-  .module('logging')
+  .module('party')
   .service("CurrentUser", CurrentUser);
 
 CurrentUser.$inject = ["TokenService"];

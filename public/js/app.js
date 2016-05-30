@@ -1,6 +1,6 @@
 angular
-  .module('party', ['satellizer'])
-  .constant('API_URL', 'http://localhost:3000')
+  .module('party', ['satellizer', 'ui.router', 'angular-jwt', 'ngResource'])
+  .constant('API_URL', 'http://localhost:3000/api')
   .constant('facebookClientId', "482249538632671")
   .config(oauthConfig)
   .config(Router)
@@ -27,8 +27,8 @@ function Router($stateProvider, $locationProvider, $urlRouterProvider){
     .state("partiesIndex", {
       url:      "/parties",
       templateUrl: "./views/parties-index.html",
-      controller: "partiesIndexController",
-      controllerAs: "partiesIX"
+      controller: "partiesController",
+      controllerAs: "parties"
     })
     .state('login', {
       url: "/login",

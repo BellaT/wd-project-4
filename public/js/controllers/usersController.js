@@ -1,5 +1,5 @@
 angular
-  .module('logging')
+  .module('party')
   .controller('UsersController', UsersController);
 
 UsersController.$inject = ['User', 'CurrentUser', '$state', '$stateParams'];

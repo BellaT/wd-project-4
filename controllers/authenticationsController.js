@@ -1,10 +1,12 @@
-var User = require("../models/user");
-var config = require("../config/config");
-var rp = require('request-promise');
-var jwt = require('jsonwebtoken');
+var User     = require("../models/user");
+var passport = require("passport");
+var secret   = require('../config/config').secret;
+var config   = require("../config/config");
+var rp       = require('request-promise');
+var jwt      = require('jsonwebtoken');
 
 
-  function facebook(req, res) {
+function facebook(req, res) {
     var params = {
       code: req.body.code,
       client_id: req.body.clientId,
@@ -36,7 +38,6 @@ var jwt = require('jsonwebtoken');
         })
         .then(function(user) {
           var token = jwt.sign(user, config.secret, { expiresIn: '24h' });
-          console.log(token);
           return res.send({ token: token });
         })
         .catch(function(err) {
@@ -45,6 +46,45 @@ var jwt = require('jsonwebtoken');
         });
   }
 
+  function register(req, res, next) {
+  var localStrategy = passport.authenticate('local-signup', function(err, user, info) {
+    if (err) return res.status(500).json({ message: 'Something went wrong!' });
+    if (info) return res.status(401).json({ message: info.message });
+    if (!user) return res.status(401).json({ message: 'User already exists!' });
+
+    var token = jwt.sign(user, secret, { expiresIn: 60*60*24 });
+
+    return res.status(200).json({
+      success: true,
+      message: "Thank you for authenticating",
+      token: token,
+      user: user
+    });
+  });
+  return localStrategy(req, res, next);
+}
+
+function login(req, res, next) {
+  User.findOne({
+    "local.email": req.body.email
+  }, function(err, user) {
+    if (err) return res.status(500).json(err);
+    if (!user) return res.status(403).json({ message: 'No user found.' });
+    if (!user.validPassword(req.body.password)) return res.status(403).json({ message: 'Authentication failed.' });
+
+    var token = jwt.sign(user, secret, { expiresIn: 60*60*24 });
+
+    return res.status(200).json({
+      success: true,
+      message: 'Welcome!',
+      token: token,
+      user: user
+    });
+  });
+}
+
 module.exports = {
-  facebook: facebook
+  facebook: facebook,
+  login: login,
+  register: register
 };
