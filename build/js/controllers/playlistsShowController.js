@@ -1,9 +1,9 @@
 angular
   .module("party")
-  .controller("YouTubeController", YouTubeController);
+  .controller("PlaylistsShowController", PlaylistsShowController);
 
-YouTubeController.$inject = ["YouTubePlayer"];
-function YouTubeController(YouTubePlayer){
+PlaylistsShowController.$inject = ["YouTubePlayer"];
+function PlaylistsShowController(YouTubePlayer){
 
   var self = this;
   self.playNext = YouTubePlayer.playNext;

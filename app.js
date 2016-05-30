@@ -48,6 +48,29 @@ app.use('/api', expressJWT({ secret: secret })
   }
   next();
 });
+app.use(function(req, res, next){
+  var payload;
+  if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
+    payload = req.headers.authorization.split(' ')[1];
+  }
+  if (payload) {
+    var decoded = jwt.verify(payload, secret);
+    if (decoded._doc) {
+      User
+      .findById({ _id: decoded._doc._id }, function(err, user) {
+        if (err) return res.status(401).json({message: 'No user found'});
+        if (!user) return res.status(401).json({message: 'No user found'});
+        req.user = user;
+        return next();
+      });
+    } else {
+      return next();
+    }
+  } else {
+    return next();
+  }
+});
+
 app.use("/", express.static("public"));
 app.use("/", express.static("bower_components"));
 

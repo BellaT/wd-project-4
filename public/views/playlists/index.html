@@ -1,0 +1,8 @@
+<div class="container">
+  <h1>My Playlists</h1>
+  <ul>
+    <li ng-repeat="playlist in playlistsIndex.all">
+      <a ui-sref="playlistShow({ id: playlist._id })">{{ playlist.title }}</a>
+    </li>
+  </ul>
+</div>

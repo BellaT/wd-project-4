@@ -3,17 +3,24 @@ var express = require('express'),
 
 var usersController = require('../controllers/usersController');
 var authenticationsController = require('../controllers/authenticationsController');
+var playlistsController = require('../controllers/playlistsController');
 
 router.route('/')
   .get(usersController.usersIndex);
 
 router.route('/users')
   .get(usersController.usersIndex);
-  
+
 router.route('/users/:id')
   .get(usersController.usersShow)
   .patch(usersController.usersUpdate)
   .delete(usersController.usersDelete);
+
+router.route("/playlists")
+  .get(playlistsController.playlistsIndex)
+  .post(playlistsController.playlistsCreate);
+router.route("/playlists/:id")
+  .get(playlistsController.playlistsShow);
 
 router.route('/login').post(authenticationsController.login);
 router.route('/register').post(authenticationsController.register);

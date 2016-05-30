@@ -3,26 +3,8 @@
     <head>
         <meta charset="utf-8">
         <title>Everyone's a DJ</title>
-        <!-- <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css"> -->
         <link href='https://fonts.googleapis.com/css?family=Poppins:400,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="/css/style.css">
-        <!-- <link rel="stylesheet" href="/css/animate.css"> -->
-        <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script> -->
-        <!-- <script src="/angular/angular.min.js"></script>
-        <script src="/angular-ui-router/release/angular-ui-router.min.js"></script>
-        <script src="/angular-resource/angular-resource.min.js"></script>
-        <script src="/angular-jwt/dist/angular-jwt.min.js" charset="utf-8"></script>
-        <script src="/satellizer/satellizer.min.js" charset="utf-8"></script>
-        <script src="/js/app.js"></script>
-        <script src="/js/services/authInterceptor.js"></script>
-        <script src="/js/services/tokenService.js"></script>
-        <script src="/js/services/currentUser.js"></script>
-        <script src="/js/models/user.js"></script>
-        <script src="/js/controllers/usersController.js"></script>
-        <script src="/js/controllers/mainController.js"></script>
-        <script src="/jquery/dist/jquery.min.js" charset="utf-8"></script>
-        <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
-        </script> -->
         <script src="/js/app.js" charset="utf-8"></script>
         <base href="/"/>
     </head>
@@ -38,30 +20,34 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#" ui-sref-active="active"   ui-sref="home">Everybody's a DJ!</a>
+              <a class="navbar-brand" ui-sref-active="active"   ui-sref="home">Everybody's a DJ!</a>
             </div>
 
 
           <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav">
-                <li ng-show="users.checkLoggedIn()">
-                  <a ui-sref="partiesIndex">My Parties</a>
-                  <a ui-sref="playlists">My Playlists</a>
+              <ul class="nav navbar-nav" ng-show="users.checkLoggedIn()">
+                <li>
+                  <a ui-sref="playlistsIndex">My Playlists</a>
+                </li>
+              </ul>
+              <ul class="nav navbar-nav" ng-show="users.checkLoggedIn()">
+                <li>
+                  <a ui-sref="playlistsNew">Create Playlist</a>
                 </li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
                 <li ng-show="users.checkLoggedIn()">
-                  <a href="#" ui-sref="users">Users</a>
+                  <a ui-sref="users">Users</a>
                 </li>
                 <li ng-hide="users.checkLoggedIn()">
-                  <a href="#" ui-sref="login">Login</a>
+                  <a ui-sref="login">Login</a>
                 </li>
                 <li ng-hide="users.checkLoggedIn()">
-                  <a href="#" ui-sref="register">Register</a>
+                  <a ui-sref="register">Register</a>
                 </li>
                 <li ng-show="users.checkLoggedIn()">
-                  <a href="#" ui-sref="home" ng-click="users.logout()">Logout</a>
+                  <a ui-sref="home" ng-click="users.logout()">Logout</a>
                 </li>
               </ul>
             </div><!-- /.navbar-collapse -->
