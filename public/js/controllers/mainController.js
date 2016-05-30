@@ -7,6 +7,6 @@ function MainController($auth) {
 
   this.authenticate = function(provider) {
     $auth.authenticate(provider);
-  }
+  };
 
 }
