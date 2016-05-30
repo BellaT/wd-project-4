@@ -2,13 +2,13 @@
 <html data-ng-app="party">
     <head>
         <meta charset="utf-8">
-        <title>InstaDate</title>
-        <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+        <title>Everyone's a DJ</title>
+        <!-- <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css"> -->
         <link href='https://fonts.googleapis.com/css?family=Poppins:400,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="/css/style.css">
         <!-- <link rel="stylesheet" href="/css/animate.css"> -->
         <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script> -->
-        <script src="/angular/angular.min.js"></script>
+        <!-- <script src="/angular/angular.min.js"></script>
         <script src="/angular-ui-router/release/angular-ui-router.min.js"></script>
         <script src="/angular-resource/angular-resource.min.js"></script>
         <script src="/angular-jwt/dist/angular-jwt.min.js" charset="utf-8"></script>
@@ -22,7 +22,8 @@
         <script src="/js/controllers/mainController.js"></script>
         <script src="/jquery/dist/jquery.min.js" charset="utf-8"></script>
         <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
-        </script>
+        </script> -->
+        <script src="/js/app.js" charset="utf-8"></script>
         <base href="/"/>
     </head>
     <body data-ng-controller="UsersController as users">
@@ -46,6 +47,7 @@
               <ul class="nav navbar-nav">
                 <li ng-show="users.checkLoggedIn()">
                   <a ui-sref="partiesIndex">My Parties</a>
+                  <a ui-sref="playlists">My Playlists</a>
                 </li>
               </ul>
               <ul class="nav navbar-nav navbar-right">

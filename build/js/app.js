@@ -24,10 +24,6 @@ function Router($stateProvider, $locationProvider, $urlRouterProvider){
       url:    "/",
       templateUrl: "./views/home.html"
     })
-    .state("partiesIndex", {
-      url:      "/parties",
-      templateUrl: "./views/parties/parties-index.html"
-    })
     .state('login', {
       url: "/login",
       templateUrl: "./views/authentications/login.html"
@@ -44,6 +40,25 @@ function Router($stateProvider, $locationProvider, $urlRouterProvider){
       url: "/users/:id",
       templateUrl: "./views/users/show.html",
       controller: "UsersController as profile"
+    })
+    .state("partiesIndex", {
+      url:      "/parties",
+      templateUrl: "./views/parties/parties-index.html"
+    })
+    .state('playlists', {
+      url: "/playlists",
+      templateUrl: "./views/parties/playlists.html"
+    })
+    .state('show', {
+      url: "/playlists/:id",
+      templateUrl: "./views/parties/show.html",
+      controller: "YouTubeController",
+      controllerAs: "youtube"
     });
   $urlRouterProvider.otherwise("/");
 }
+
+
+// particlesJS.load('particles-js', 'assets/particles.json', function() {
+//   console.log('callback - particles.js config loaded');
+// });
