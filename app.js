@@ -39,15 +39,12 @@ app.use('/api', expressJWT({ secret: secret })
   .unless({
     path: [
       { url: '/api/login', methods: ['POST'] },
-      { url: '/api/register', methods: ['POST'] }
+      { url: '/api/register', methods: ['POST'] },
+      { url: '/api/auth/facebook', methods: ['POST'] }
     ]
-  }));
-  app.use(function (err, req, res, next) {
-  if (err.name === 'UnauthorizedError') {
-    return res.status(401).json({message: 'Unauthorized request.'});
-  }
-  next();
-});
+  })
+);
+
 app.use(function(req, res, next){
   var payload;
   if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
@@ -58,9 +55,10 @@ app.use(function(req, res, next){
     if (decoded._doc) {
       User
       .findById({ _id: decoded._doc._id }, function(err, user) {
-        if (err) return res.status(401).json({message: 'No user found'});
+        if (err) return res.json({err: err, user: user});
         if (!user) return res.status(401).json({message: 'No user found'});
         req.user = user;
+        console.log("USER=======" + req.user);
         return next();
       });
     } else {
@@ -69,6 +67,13 @@ app.use(function(req, res, next){
   } else {
     return next();
   }
+});
+
+app.use(function (err, req, res, next) {
+  if (err.name === 'UnauthorizedError') {
+    return res.status(401).json({message: 'Unauthorized request.', err: err});
+  }
+  next();
 });
 
 app.use("/", express.static("public"));

@@ -7,6 +7,7 @@ var jwt      = require('jsonwebtoken');
 
 
 function facebook(req, res) {
+  console.log("FACEBOOK POST");
     var params = {
       code: req.body.code,
       client_id: req.body.clientId,
@@ -14,13 +15,18 @@ function facebook(req, res) {
       redirect_uri: config.appUrl + "/"
     };
 
+    console.log(params);
+
     rp.get({ url: config.oauth.facebook.accessTokenUrl, qs: params, json: true })
       .then(function(accessToken) {
+        console.log("accessToken", accessToken);
         return rp.get({ url: config.oauth.facebook.profileUrl, qs: accessToken, json: true });
       })
       .then(function(profile) {
+        console.log("profile",profile);
         return User.findOne({ email: profile.email })
           .then(function(user) {
+            console.log("user", user);
             if(user) {
               user.facebookId = profile.id;
               user.picture = user.picture || profile.picture.data.url;
@@ -38,10 +44,11 @@ function facebook(req, res) {
         })
         .then(function(user) {
           var token = jwt.sign(user, config.secret, { expiresIn: '24h' });
+          console.log("token", token);
           return res.send({ token: token });
         })
         .catch(function(err) {
-          console.log(err);
+          console.log("error",err);
           return res.status(500).json({ error: err });
         });
   }

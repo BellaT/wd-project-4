@@ -1,8 +1,13 @@
 <div class="container">
-  <h1>My Playlists</h1>
-  <ul>
-    <li ng-repeat="playlist in playlistsIndex.all">
-      <a ui-sref="playlistShow({ id: playlist._id })">{{ playlist.title }}</a>
-    </li>
-  </ul>
+  <h2>My Playlists</h2>
+  <div class="row">
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail" ng-repeat="playlist in playlistsIndex.all">
+        <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQsBS_Szu5y1q2cF9RU7BsOnISs34s6qW7DXmsbmVyYjWNtgjwN" alt="...">
+        <div class="caption">
+          <h3><a ui-sref="playlistsShow({ id: playlist._id })">{{ playlist.title }}</a></h3>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
