@@ -11,7 +11,8 @@ function Playlist($resource, API_URL){
       'save':      { method: 'POST' },
       'query':     { method: 'GET', isArray: false},
       'remove':    { method: 'DELETE' },
-      'delete':    { method: 'DELETE' }
+      'delete':    { method: 'DELETE' },
+      'update':    { method: 'PUT'}
     }
   );
 }

@@ -5,6 +5,10 @@ body {
   color: rgba(255,255,255,0.8);
 }
 
+a {
+  cursor: pointer;
+}
+
 h2 {
   text-align: center;
   margin-bottom: 100px;
@@ -51,6 +55,14 @@ button {
   background-color: rgba(0,0,0,0.8);
   border: 1px solid rgba(0,0,0,0.8);
   width: 270px;
+  margin: 0 auto;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 640px) {
+  .thumbnail {
+    width: initial;
+  }
 }
 
 .thumbnail h3 {
@@ -75,4 +87,64 @@ button {
 .box img {
   height: 100%;
   width: 100%;
+}
+
+.homebox {
+  width: 600px;
+  height: 600px;
+  margin: 0 auto;
+}
+
+.homebox img {
+  max-width: 600px;
+}
+
+.home  {
+    width: 1024px;
+    height: 768px;
+    overflow: hidden;
+    position: relative;
+    margin: 50px auto;
+    border: 10px solid #0B292D;
+    background: #000;
+}
+
+.background  {
+    background: url(/images/night-sky.jpg);
+    width: 1024px;
+    height: 768px;
+ }
+
+.layer div  {
+    position: absolute;
+}
+
+.kurama {
+    top: -100px;
+    left: -150px;
+}
+
+.playlists {
+    top: 330px;
+    left: 250px;
+}
+
+.create {
+    top: 520px;
+    left: 550px;
+}
+
+.landscape {
+    top: 500px;
+    left: -250px;
+}
+
+.grass {
+    top: 700px;
+    left: -250px;
+}
+
+.leaves {
+    top: 350px;
+    left: 0px;
 }

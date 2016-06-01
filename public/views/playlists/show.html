@@ -6,7 +6,7 @@
       <button ng-click="playlistsShow.playNext()">Next</button>
       <script src="http://www.youtube.com/iframe_api"></script>
   </div>
-
+  <button type="delete" ng-click="playlistsShow.deletePlaylist()">Delete</button>
   <h3>Up Next...</h3>
   <div class="row">
     <div class="col-xs-6 col-md-3" id="title">
@@ -17,11 +17,12 @@
 
   <h3>Add another one to the list..</h3>
   <div class="col-md-6 col-md-offset-3">
-    <form>
+    <form ng-submit="playlistsShow.setVideos()">
       <div class="form-group">
         <label for="videos">YouTube Tracks</label>
-        <input type="text" class="form-control" ng-model="playlistNew.playlist.videos" placeholder="YouTube Track (URL)">
+        <input type="text" class="form-control" ng-model="playlistsShow.playlist.videos" placeholder="YouTube Track (URL)">
       </div>
+      <button type="submit" name="button">Add</button>
     </form>
   </div>
 </div>

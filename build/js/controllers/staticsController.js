@@ -10,4 +10,8 @@ function StaticsController($state) {
     ease: Power0.easeNone
   });
 
+  $('#landing').parallax();
+  $('#scene').parallax();
+  $('#layer1').css('position', 'absolute');
+
 }

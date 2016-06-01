@@ -20,7 +20,9 @@ router.route("/playlists")
   .get(playlistsController.playlistsIndex)
   .post(playlistsController.playlistsCreate);
 router.route("/playlists/:id")
-  .get(playlistsController.playlistsShow);
+  .get(playlistsController.playlistsShow)
+  .put(playlistsController.playlistsUpdate)
+  .delete(playlistsController.playlistsDelete);
 
 router.route('/login').post(authenticationsController.login);
 router.route('/register').post(authenticationsController.register);

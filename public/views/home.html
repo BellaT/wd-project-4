@@ -1,6 +1,57 @@
 <div ng-controller="StaticsController as statics">
-  <h1>Home</h1>
-  <div class="box" ng-hide="users.checkLoggedIn()">
-    <img id="vinyl" ng-src="http://www.theartsdesk.com/sites/default/files/images/stories/NEW_MUSIC/thomas_h_green/vinyl.jpg" ui-sref="login"/>
+  <div class="box" ng-show="users.checkLoggedIn()">
+    <div class="home">
+		<ul id="scene" class="scene">
+		  <li class="layer" data-depth="0.00">
+			<div class="background"></div>
+		  </li>
+
+		  <li class="layer" data-depth="0.60">
+			<div class="kurama"><img src="images/layer5.png"></div>
+		  </li>
+
+		  <li class="layer" data-depth="0.40" data-invert-y="false">
+		  <div class="landscape"><img src="images/layer4.png" /></div>
+		  </li>
+
+		  <li class="layer" data-depth="0.60">
+			<div class="grass"><img src="images/layer2.png" /></div>
+		  </li>
+
+		  <li class="layer" data-depth="1.20">
+			<div class="playlists"><a ui-sref="playlistsIndex">PLAYLISTS</a></div>
+		  </li>
+
+		  <li class="layer" data-depth="1.20">
+		  <div class="create"><a ui-sref="playlistsNew">CREATE</a></div>
+		  </li>
+
+		  <li class="layer" data-depth="2.30">
+			<div class="leaves"><img src="images/layer1.png"></div>
+		  </li>
+		</ul>
+	</div>
+  </div>
+  <div class="homebox" ng-hide="users.checkLoggedIn()" ui-sref="login">
+    <ul id="landing"
+     data-calibrate-x="true"
+     data-calibrate-y="true"
+     data-invert-x="false"
+     data-invert-y="false"
+     data-limit-x="true"
+     data-limit-y="true"
+     data-scalar-x="10"
+     data-scalar-y="10"
+     data-friction-x="0.8"
+     data-friction-y="0.8"
+     data-origin-x="0.2"
+     data-origin-y="1.0">
+     <li class="layer" id="layer1" data-depth="0.00"><img src="images/layer1.png"></li>
+     <li class="layer" data-depth="0.20"><img src="images/layer2.png"></li>
+     <li class="layer" data-depth="0.40"><img src="images/layer3.png"></li>
+     <li class="layer" data-depth="0.60"><img src="images/layer4.png"></li>
+     <li class="layer" data-depth="0.80"><img src="images/layer5.png"></li>
+     <li class="layer" data-depth="1.00"><img src="images/layer6.png"></li>
+    </ul>
   </div>
 </div>
