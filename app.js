@@ -58,7 +58,6 @@ app.use(function(req, res, next){
         if (err) return res.json({err: err, user: user});
         if (!user) return res.status(401).json({message: 'No user found'});
         req.user = user;
-        console.log("USER=======" + req.user);
         return next();
       });
     } else {

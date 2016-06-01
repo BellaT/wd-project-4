@@ -12,7 +12,11 @@ function Playlist($resource, API_URL){
       'query':     { method: 'GET', isArray: false},
       'remove':    { method: 'DELETE' },
       'delete':    { method: 'DELETE' },
-      'update':    { method: 'PUT'}
+      'update':    { method: 'PUT' },
+      'add': {
+        url: API_URL + '/playlists/:id/add',
+        method: 'PUT'
+      }
     }
   );
 }

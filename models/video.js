@@ -12,13 +12,9 @@ videoSchema.path('youtube_id')
 });
 
 function youtube_parser(url){
-  var regExp = /^.*(youtu.be\/|youtube(-nocookie)?.com\/(v\/|.*u\/\w\/|embed\/|.*v=))([\w-]{11}‌​).*/;
+  var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
   var match = url.match(regExp);
-  if (match && match[2].length == 11) {
-    return match[2];
-  } else {
-    return null;
-  }
+  return (match&&match[7].length==11)? match[7] : false;
 }
 
 module.exports = mongoose.model("Video", videoSchema);

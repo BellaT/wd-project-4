@@ -8,7 +8,6 @@ function PlaylistsNewController(Playlist, $state){
   var self = this;
   self.create = function(){
     Playlist.save(self.playlist).$promise.then(function(data){
-      console.log(data);
       $state.go("playlistsShow");
     });
   };

@@ -23,6 +23,8 @@ router.route("/playlists/:id")
   .get(playlistsController.playlistsShow)
   .put(playlistsController.playlistsUpdate)
   .delete(playlistsController.playlistsDelete);
+router.route("/playlists/:id/add")
+  .put(playlistsController.playlistsAddVideo);
 
 router.route('/login').post(authenticationsController.login);
 router.route('/register').post(authenticationsController.register);

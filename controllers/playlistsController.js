@@ -1,4 +1,5 @@
 var Playlist = require("../models/playlist");
+var Video    = require("../models/video");
 
 function playlistsIndex(req, res, next){
   Playlist
@@ -22,41 +23,56 @@ function playlistsCreate(req, res, next){
 }
 
 function playlistsShow(req, res, next){
-  console.log("playlistShow: \n", req.params);
-
-  Playlist.findById(req.params.id, function(err, playlist){
+  Playlist.findById(req.params.id)
+  .populate("videos")
+  .exec(function(err, playlist){
     if (err) return res.status(404).json({message: 'Something went wrong.'});
     res.status(200).json({ playlist: playlist });
-    console.log("PLAYLIST: \n", playlist);
   });
 }
 
 function playlistsUpdate(req, res, next){
   var id = req.params.id;
-
-    console.log("req.body.playlist: \n", req.body.playlist);
-
     Playlist.findByIdAndUpdate({ _id: id }, req.body.playlist, { new: true }, function(err, playlist){
-      if (err) return res.status(500).send(err);
-      if (!playlist) return res.status(404).send(err);
-      res.status(200).send(playlist);
-      console.log('playlistsUpdate() in back-end controller');
+      if (err) return res.status(500).json(err);
+      if (!playlist) return res.status(404).json(err);
+      res.status(200).json(playlist);
     });
+}
+
+function playlistsAddVideo(req, res, next){
+  var id = req.params.id;
+
+  Video.create(req.body, function(err, video){
+    if (err) return res.status(500).json(err);
+    Playlist.findByIdAndUpdate({ _id: id }, {
+      $addToSet: {
+        videos: video._id
+      }
+    }, { new: true })
+    .populate("videos")
+    .exec(function(err, playlist){
+      if (err) return res.status(500).json(err);
+      if (!playlist) return res.status(404).json(err);
+      return res.status(200).json(playlist);
+    });
+  });
 }
 
 function playlistsDelete(req, res, next){
   var id = req.params.id;
 
   Playlist.remove({ _id: id}, function(err){
-    if (err) return res.status(500).send(err);
-    res.status(200).send();
+    if (err) return res.status(500).json(err);
+    res.status(200).json();
   });
 }
 
 module.exports = {
-  playlistsIndex:  playlistsIndex,
-  playlistsCreate: playlistsCreate,
-  playlistsShow:   playlistsShow,
-  playlistsUpdate: playlistsUpdate,
-  playlistsDelete: playlistsDelete
+  playlistsIndex:    playlistsIndex,
+  playlistsCreate:   playlistsCreate,
+  playlistsShow:     playlistsShow,
+  playlistsUpdate:   playlistsUpdate,
+  playlistsDelete:   playlistsDelete,
+  playlistsAddVideo: playlistsAddVideo
 };

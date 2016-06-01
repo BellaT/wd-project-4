@@ -62010,7 +62010,6 @@ function PlaylistsNewController(Playlist, $state){
   var self = this;
   self.create = function(){
     Playlist.save(self.playlist).$promise.then(function(data){
-      console.log(data);
       $state.go("playlistsShow");
     });
   };
@@ -62024,29 +62023,18 @@ PlaylistsShowController.$inject = ["YouTubePlayer", "$stateParams", "$state", "P
 function PlaylistsShowController(YouTubePlayer, $stateParams, $state, Playlist){
 
   var self = this;
-  self.playlists = Playlist.query();
-  self.playlist = {};
-  self.deletePlaylist = deletePlaylist;
-  self.playNext = YouTubePlayer.playNext;
+  self.playNext     = YouTubePlayer.playNext;
   self.playPrevious = YouTubePlayer.playPrevious;
-  self.setVideos = YouTubePlayer.setVideos;
-  self.getPlaylist = getPlaylist;
+  self.setVideos    = YouTubePlayer.setVideos;
+  self.deletePlaylist = deletePlaylist;
+  self.addVideo    = addVideo;
 
-
-
-  function getPlaylist(){
-    var playlistId = $stateParams.id;
-
-    Playlist.get({id: playlistId }, function(data){
-      console.log('data: \n', data);
-    });
-  }
-
-  var finalPlaylist = [
-    'de4_vbntd50',
-    'F-mjl63e0ms',
-    '5X-Mrc2l1d0'
-  ];
+  Playlist.get($stateParams, function(data){
+    self.playlist = data.playlist;
+    YouTubePlayer.setVideos(data.playlist.videos.map(function(video){
+      return video.youtube_id;
+    }));
+  });
 
   function deletePlaylist(){
     var playlistId = $stateParams.id;
@@ -62054,7 +62042,12 @@ function PlaylistsShowController(YouTubePlayer, $stateParams, $state, Playlist){
     $state.go("playlistsIndex");
   }
 
-  YouTubePlayer.setVideos(finalPlaylist);
+  function addVideo(){
+    Playlist.add($stateParams, { youtube_id: self.video }).$promise.then(function(data){
+      console.log(data);
+    });
+  }
+
 }
 
 angular
@@ -63195,7 +63188,11 @@ function Playlist($resource, API_URL){
       'query':     { method: 'GET', isArray: false},
       'remove':    { method: 'DELETE' },
       'delete':    { method: 'DELETE' },
-      'update':    { method: 'PUT'}
+      'update':    { method: 'PUT' },
+      'add': {
+        url: API_URL + '/playlists/:id/add',
+        method: 'PUT'
+      }
     }
   );
 }

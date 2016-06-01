@@ -17,10 +17,10 @@
 
   <h3>Add another one to the list..</h3>
   <div class="col-md-6 col-md-offset-3">
-    <form ng-submit="playlistsShow.setVideos()">
+    <form ng-submit="playlistsShow.addVideo()">
       <div class="form-group">
         <label for="videos">YouTube Tracks</label>
-        <input type="text" class="form-control" ng-model="playlistsShow.playlist.videos" placeholder="YouTube Track (URL)">
+        <input type="text" class="form-control" ng-model="playlistsShow.video" placeholder="YouTube Track (URL)">
       </div>
       <button type="submit" name="button">Add</button>
     </form>
