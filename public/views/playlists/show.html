@@ -1,12 +1,16 @@
 <div class="container">
   <h2 ng-repeat="playlist in playlistsShow">{{playlist.title}}</h2>
-  <div id="player"></div>
-  <div class="controls" style="text-align: center;margin: 0 auto;">
-      <button ng-click="playlistsShow.playPrevious()">Previous</button>
-      <button ng-click="playlistsShow.playNext()">Next</button>
-      <script src="http://www.youtube.com/iframe_api"></script>
-  </div>
-  <button type="delete" ng-click="playlistsShow.deletePlaylist()">Delete</button>
+
+  <section>
+    <div id="player"></div>
+    <div class="controls" style="text-align: center;margin: 0 auto;">
+        <button ng-click="playlistsShow.playPrevious()">Previous</button>
+        <button ng-click="playlistsShow.playNext()">Next</button>
+        <script src="http://www.youtube.com/iframe_api"></script>
+    </div>
+    <button type="delete" ng-click="playlistsShow.deletePlaylist()">Delete</button>
+  </section>
+
   <h3>Up Next...</h3>
   <div class="row">
     <div class="col-xs-6 col-md-3" id="title">

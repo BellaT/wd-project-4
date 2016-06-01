@@ -63,6 +63,11 @@ function YouTubePlayer($window) {
   };
 
   $window.onYouTubeIframeAPIReady = function() {
+    console.log("Running");
+    self.createPlayer();
+  };
+
+  self.createPlayer = function(){
     self.player = new YT.Player('player', {
       height: '350',
       width: '425',

@@ -36,7 +36,7 @@ function playlistsUpdate(req, res, next){
     Playlist.findByIdAndUpdate({ _id: id }, req.body.playlist, { new: true }, function(err, playlist){
       if (err) return res.status(500).json(err);
       if (!playlist) return res.status(404).json(err);
-      res.status(200).json(playlist);
+      res.status(200).json({playlist: playlist});
     });
 }
 
@@ -54,7 +54,7 @@ function playlistsAddVideo(req, res, next){
     .exec(function(err, playlist){
       if (err) return res.status(500).json(err);
       if (!playlist) return res.status(404).json(err);
-      return res.status(200).json(playlist);
+      return res.status(200).json({playlist: playlist});
     });
   });
 }

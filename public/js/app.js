@@ -62008,9 +62008,10 @@ PlaylistsNewController.$inject = ["Playlist", "$state"];
 function PlaylistsNewController(Playlist, $state){
 
   var self = this;
+
   self.create = function(){
     Playlist.save(self.playlist).$promise.then(function(data){
-      $state.go("playlistsShow");
+      $state.go("playlistsShow", { id: data.playlist._id });
     });
   };
 }
@@ -62019,21 +62020,19 @@ angular
   .module("party")
   .controller("PlaylistsShowController", PlaylistsShowController);
 
-PlaylistsShowController.$inject = ["YouTubePlayer", "$stateParams", "$state", "Playlist"];
-function PlaylistsShowController(YouTubePlayer, $stateParams, $state, Playlist){
+PlaylistsShowController.$inject = ["YouTubePlayer", "$stateParams", "$state", "Playlist", "$window", "$http"];
+function PlaylistsShowController(YouTubePlayer, $stateParams, $state, Playlist, $window, $http){
 
-  var self = this;
-  self.playNext     = YouTubePlayer.playNext;
-  self.playPrevious = YouTubePlayer.playPrevious;
-  self.setVideos    = YouTubePlayer.setVideos;
+  var self            = this;
+  self.playNext       = YouTubePlayer.playNext;
+  self.playPrevious   = YouTubePlayer.playPrevious;
+  self.setVideos      = YouTubePlayer.setVideos;
   self.deletePlaylist = deletePlaylist;
-  self.addVideo    = addVideo;
+  self.addVideo       = addVideo;
 
   Playlist.get($stateParams, function(data){
     self.playlist = data.playlist;
-    YouTubePlayer.setVideos(data.playlist.videos.map(function(video){
-      return video.youtube_id;
-    }));
+    setVideos(data.playlist);
   });
 
   function deletePlaylist(){
@@ -62042,9 +62041,17 @@ function PlaylistsShowController(YouTubePlayer, $stateParams, $state, Playlist){
     $state.go("playlistsIndex");
   }
 
+  function setVideos(playlist){
+    YouTubePlayer.setVideos(playlist.videos.map(function(video){
+      return video.youtube_id;
+    }));
+  }
+
   function addVideo(){
     Playlist.add($stateParams, { youtube_id: self.video }).$promise.then(function(data){
-      console.log(data);
+      self.video = null;
+      self.playlist = data.playlist;
+      setVideos(data.playlist);
     });
   }
 
@@ -63371,6 +63378,11 @@ function YouTubePlayer($window) {
   };
 
   $window.onYouTubeIframeAPIReady = function() {
+    console.log("Running");
+    self.createPlayer();
+  };
+
+  self.createPlayer = function(){
     self.player = new YT.Player('player', {
       height: '350',
       width: '425',
