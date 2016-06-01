@@ -62004,13 +62004,14 @@ angular
   .module("party")
   .controller("PlaylistsNewController", PlaylistsNewController);
 
-PlaylistsNewController.$inject = ["Playlist"];
-function PlaylistsNewController(Playlist){
+PlaylistsNewController.$inject = ["Playlist", "$state"];
+function PlaylistsNewController(Playlist, $state){
 
   var self = this;
   self.create = function(){
     Playlist.save(self.playlist).$promise.then(function(data){
       console.log(data);
+      $state.go("playlistsShow");
     });
   };
 }
@@ -62172,7 +62173,6 @@ angular
   function AuthInterceptor(API_URL, TokenService) {
     return {
       request: function(config){
-        console.log(config);
         var token = TokenService.getToken();
 
         if (config.url.indexOf(API_URL) === 0 && token) {
