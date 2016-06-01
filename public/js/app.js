@@ -62034,6 +62034,20 @@ function PlaylistsShowController(YouTubePlayer){
 }
 
 angular
+.module('party')
+.controller('StaticsController', StaticsController);
+
+StaticsController.$inject = ['$state'];
+function StaticsController($state) {
+
+  TweenMax.from('img#vinyl', 1, {
+    opacity: 0,
+    ease: Power0.easeNone
+  });
+
+}
+
+angular
   .module('party')
   .controller('UsersController', UsersController);
 
@@ -62105,18 +62119,6 @@ function UsersController(User, CurrentUser, $state, $stateParams){
 
   return self;
 }
-
-$(document).ready(function(){
-
-  var vinyl = angular.element('#vinyl');
-  console.log(vinyl);
-  TweenMax.from(vinyl, 4, {
-    // rotation:360, x:300
-    opacity: 0,
-    ease: Power0.easeNone
-  });
-
-});
 
 angular
   .module('party')
