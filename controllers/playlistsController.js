@@ -17,6 +17,7 @@ function playlistsCreate(req, res, next){
   playlist.user = req.user;
 
   playlist.save(function(err, playlist){
+    console.log(err, playlist)
     if (err) return res.status(500).json({message: "Something went wrong."});
     return res.status(201).json({playlist: playlist});
   });

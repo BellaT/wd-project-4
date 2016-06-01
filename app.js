@@ -12,6 +12,8 @@ var cookieParser    = require("cookie-parser");
 var jwt             = require('jsonwebtoken');
 var expressJWT      = require('express-jwt');
 var app             = express();
+var server          = require('http').createServer(app);
+var io              = require("socket.io")(server);
 
 var User            = require('./models/user');
 var routes          = require('./config/routes');
@@ -84,5 +86,14 @@ app.get("/*", function(req, res){
   res.sendFile(__dirname + "/public/index.html");
 });
 
-app.listen(config.port);
+server.listen(config.port);
 console.log("Express is listening on port " + config.port);
+
+io.on('connect', function(socket) {
+  socket.on("joinRoom", function(room){
+    socket.join(room);
+  });
+  socket.on('addVideo', function(data) {
+    socket.broadcast.to(data.channel_id).emit("updateVideo", data.youtube_id);
+  });
+});
