@@ -1,30 +1,13 @@
 @import "_bower";
 
 body {
-  background-image: url("http://montco.happeningmag.com/wp-content/uploads/2013/08/night-sky-hd-wallpaper-2.jpg");
-  color: #00FFAA; //rgba(255,255,255,0.8);
-}
-
-.btn.btn-default {
-  border: 2px solid #00FFAA;
-}
-
-.form-control {
-  border: 2px solid #00FFAA;
+  background: black;
+  color: rgba(255,255,255,0.9);
+  font-family: 'Montserrat', sans-serif;
 }
 
 .homelinks {
   cursor: pointer;
-}
-
-h2 {
-  text-align: center;
-  // margin-bottom: 100px;
-}
-
-h3 {
-  text-align: center;
-  // margin-bottom: 100px;
 }
 
 .navbar-default {
@@ -33,14 +16,17 @@ h3 {
 }
 
 .navbar-default .navbar-nav > li > a {
-  color: rgba(255,255,255,0.8);
+  color: rgba(255,255,255,0.9);
 }
 .navbar-default .navbar-nav > li > a:hover {
-  color: #00FFAA;
+  color: darken(#00FFAA, 5%);
 }
 
 .navbar-default .navbar-brand {
-  color: rgba(255,255,255,0.8);
+  color: rgba(255,255,255,0.9);
+}
+.navbar-default .navbar-brand:hover {
+  color: darken(#00FFAA, 5%);
 }
 
 #player {
@@ -61,6 +47,10 @@ form {
 
 #adding {
   margin-top: 10px;
+  padding-top: 10px;
+}
+
+#friends {
   padding-top: 10px;
 }
 
@@ -87,18 +77,12 @@ form {
   color: rgba(255,255,255,0.8);
 }
 
+.thumbnail a:hover {
+  text-decoration: none;
+  color: darken(#00FFAA, 5%);
+}
+
 .thumbnail img {
-  width: 100%;
-}
-
-.box {
-  height: 200px;
-  width: 200px;
-  float: left;
-}
-
-.box img {
-  height: 100%;
   width: 100%;
 }
 
@@ -132,32 +116,88 @@ form {
     position: absolute;
 }
 
-.kurama {
-    top: -100px;
-    left: -150px;
+#top {
+  position: relative;
+  padding: 0;
 }
 
-.playlists {
-    top: 330px;
-    left: 250px;
+#top img {
+  width: 100%;
+  height: 450px;
 }
 
-.create {
-    top: 520px;
-    left: 550px;
+#middle-left {
+  position: relative;
+  padding: 0;
 }
 
-.landscape {
-    top: 500px;
-    left: -250px;
+#middle-left img {
+  width: 100%;
+  height: 370px;
 }
 
-.grass {
-    top: 700px;
-    left: -250px;
+#middle-right {
+  position: relative;
+  padding: 0;
 }
 
-.leaves {
-    top: 350px;
-    left: 0px;
+#middle-right img {
+  width: 100%;
+  height: 370px;
+}
+
+#bottom {
+  position: relative;
+  padding: 0;
+}
+
+#bottom img {
+  width: 100%;
+  height: 450px;
+}
+
+.description {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.72);
+  color: #fff;
+  visibility: hidden;
+  opacity: 0;
+  padding: 40px 100px;
+  text-align: center;
+  h2 {
+    margin-bottom: 30px;
+    span {
+    text-decoration: underline;
+    }
+  }
+  h4 {
+    margin-bottom: 30px;
+  }
+  p {
+    margin-bottom: 30px;
+  }
+}
+
+#top:hover .description {
+  visibility: visible;
+  opacity: 1;
+}
+
+#middle-left:hover .description {
+  visibility: visible;
+  opacity: 1;
+}
+
+#middle-right:hover .description {
+  visibility: visible;
+  opacity: 1;
+}
+
+#bottom:hover .description {
+  visibility: visible;
+  opacity: 1;
 }

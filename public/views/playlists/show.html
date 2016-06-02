@@ -29,9 +29,9 @@
     </form>
   </div>
 
-  <h4>Add friends to the playlist</h4>
   <div>
-    <form ng-submit="playlistsShow.addUserToPlaylist()">
+    <h4>Add friends to the playlist</h4>
+    <form ng-submit="playlistsShow.addUserToPlaylist()" id="friends">
       <input type="text"
             ng-model="playlistsShow.friend"
             placeholder="Select friend"

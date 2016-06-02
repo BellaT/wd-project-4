@@ -1,36 +1,32 @@
 <div ng-controller="StaticsController as statics">
-  <div class="box" ng-show="users.checkLoggedIn()">
-    <div class="home">
-		<ul id="scene" class="scene">
-		  <li class="layer" data-depth="0.00">
-			<div class="background"></div>
-		  </li>
+  <div class="row" ng-show="users.checkLoggedIn()">
+    <div class="col-md-12" id="top">
+      <img ng-src="/images/houseparty.jpg" />
+      <div class="description">
+        <h2><span>Shindig<span></h2>
+        <h4>Hosting a house party? Heading out for a BBQ? Shindig is a music sharing platfrom that allows anyone to be the DJ for a night.</h4>
+        <p>Get started by creating your playlist by adding your chosen tracks from youtube.</p>
+        <p>Once you've got the party going, you can invite your mates along to DJ with you by adding them to the playlist. This way they can select and add any youtube track they want from anywhere.  All they have to do is sign up or login. Then rave away!</p>
+      </div>
+    </div>
+    <div class="col-md-6" id="middle-left">
+      <img ng-src="/images/vinyl.jpg" />
+      <div class="description">
 
-		  <li class="layer" data-depth="0.60">
-			<div class="kurama"><img src="images/layer5.png"></div>
-		  </li>
+      </div>
+    </div>
+    <div class="col-md-6" id="middle-right">
+      <img ng-src="/images/lights.jpg" />
+      <div class="description">
 
-		  <li class="layer" data-depth="0.40" data-invert-y="false">
-		  <div class="landscape"><img src="images/layer4.png" /></div>
-		  </li>
+      </div>
+    </div>
+    <div class="col-md-12" id="bottom">
+      <img ng-src="/images/party.jpg" />
+      <div class="description">
 
-		  <li class="layer" data-depth="0.60">
-			<div class="grass"><img src="images/layer2.png" /></div>
-		  </li>
-
-		  <li class="layer" data-depth="1.20">
-			<div class="playlists"><h1 class="homelinks" ui-sref="playlistsIndex">PLAYLISTS</h1></div>
-		  </li>
-
-		  <li class="layer" data-depth="1.20">
-		  <div class="create"><h1 class="homelinks" ui-sref="playlistsNew">CREATE</h1></div>
-		  </li>
-
-		  <li class="layer" data-depth="2.30">
-			<div class="leaves"><img src="images/layer1.png"></div>
-		  </li>
-		</ul>
-	</div>
+      </div>
+    </div>
   </div>
   <div class="homebox" ng-hide="users.checkLoggedIn()" ui-sref="login">
     <ul id="landing"
