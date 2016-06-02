@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-md-4" ng-repeat="playlist in playlistsIndex.all">
       <div class="thumbnail">
-        <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQsBS_Szu5y1q2cF9RU7BsOnISs34s6qW7DXmsbmVyYjWNtgjwN" alt="...">
+        <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQsBS_Szu5y1q2cF9RU7BsOnISs34s6qW7DXmsbmVyYjWNtgjwN" ui-sref="playlistsShow({ id: playlist._id })" alt="...">
         <div class="caption">
           <h3><a ui-sref="playlistsShow({ id: playlist._id })">{{ playlist.title }}</a></h3>
         </div>

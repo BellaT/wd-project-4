@@ -1,2 +1,2 @@
 angular
-  .module('party', ['satellizer', 'ui.router', 'angular-jwt', 'ngResource']);
+  .module('party', ['satellizer', 'ui.router', 'angular-jwt', 'ngResource', 'ui.select']);

@@ -9,9 +9,10 @@ function YouTubePlayer($window) {
 
   self.current = 0;
   self.player = null;
+  self.videos = [];
 
-  self.setVideos = function(videos){
-    self.videos = videos;
+  self.setVideos = function(videosArray){
+    self.videos = videosArray;
   };
 
   self.currentlyPlaying = function(){

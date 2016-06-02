@@ -8241,16 +8241,18 @@ h3 {
   height: 315;
 }
 
-button {
-  background: white;
-  color: black;
-  padding: 10px 20px;
-  border: 0;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-family: "Helvetica Neue", Helvetica, sans-serif;
-  width: 200px;
-  font-size: 20px;
+#signin {
+  padding-top: 20px;
+}
+
+form {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+#adding {
+  margin-top: 10px;
+  padding-top: 10px;
 }
 
 .thumbnail {

@@ -94,6 +94,6 @@ io.on('connect', function(socket) {
     socket.join(room);
   });
   socket.on('addVideo', function(data) {
-    socket.broadcast.to(data.channel_id).emit("updateVideo", data.youtube_id);
+    socket.broadcast.to(data.channel_id).emit("updateVideo", data.videos_array);
   });
 });

@@ -61884,7 +61884,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
 })(window, window.angular);
 
 angular
-  .module('party', ['satellizer', 'ui.router', 'angular-jwt', 'ngResource']);
+  .module('party', ['satellizer', 'ui.router', 'angular-jwt', 'ngResource', 'ui.select']);
 
 angular
   .module('party')
@@ -62042,9 +62042,9 @@ function PlaylistsShowController(YouTubePlayer, $stateParams, $state, Playlist, 
 
   socket.emit("joinRoom", $stateParams.id);
 
-  socket.on("updateVideo", function(data){
-    alert(data);
-    // YouTubePlayer.setVideos(self.videos.push(data));
+  socket.on("updateVideo", function(videosArray){
+    console.log("updateVideo", videosArray);
+    YouTubePlayer.setVideos(videosArray);
   });
 
   function deletePlaylist(){
@@ -62061,11 +62061,12 @@ function PlaylistsShowController(YouTubePlayer, $stateParams, $state, Playlist, 
 
   function addVideo(){
     Playlist.add($stateParams, { youtube_id: self.video }).$promise.then(function(data){
+      var videosArray = mapVideos(data.playlist);
       self.video = null;
       self.playlist = data.playlist;
-      YouTubePlayer.setVideos(mapVideos(data.playlist));
+      YouTubePlayer.setVideos(videosArray);
       var socketData = {
-        youtube_id: data.playlist.videos[data.playlist.videos.length-1].youtube_id,
+        videos_array: videosArray,
         channel_id: $stateParams.id,
       };
       socket.emit("addVideo", socketData);
@@ -63374,9 +63375,10 @@ function YouTubePlayer($window) {
 
   self.current = 0;
   self.player = null;
+  self.videos = [];
 
-  self.setVideos = function(videos){
-    self.videos = videos;
+  self.setVideos = function(videosArray){
+    self.videos = videosArray;
   };
 
   self.currentlyPlaying = function(){
