@@ -43,7 +43,8 @@ function playlistsUpdate(req, res, next){
 function playlistsAddVideo(req, res, next){
   var id = req.params.id;
 
-  Video.create(req.body, function(err, video){
+  console.log("req.body\n", req.body);
+  Video.create(req.body.youtube_id, function(err, video){
     if (err) return res.status(500).json(err);
     Playlist.findByIdAndUpdate({ _id: id }, {
       $addToSet: {
@@ -52,7 +53,8 @@ function playlistsAddVideo(req, res, next){
     }, { new: true })
     .populate("videos")
     .exec(function(err, playlist){
-      if (err) return res.status(500).json(err);
+      if (err) console.log(err);
+      // if (err) return res.status(500).json(err);
       if (!playlist) return res.status(404).json(err);
       return res.status(200).json({playlist: playlist});
     });

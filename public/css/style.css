@@ -8487,6 +8487,10 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
+.container {
+  margin-bottom: 60px;
+}
+
 .homelinks {
   cursor: pointer;
 }
@@ -8515,12 +8519,6 @@ body {
 #player {
   margin: 0 auto;
   display: block;
-  width: 420;
-  height: 315;
-}
-
-#signin {
-  padding-top: 20px;
 }
 
 form {
@@ -8653,12 +8651,20 @@ form {
   text-align: center;
 }
 
-.description h2 {
+.description h1 {
   margin-bottom: 30px;
 }
 
-.description h2 span {
+.description h1 span {
   text-decoration: underline;
+}
+
+.description h2 {
+  margin-top: 120px;
+}
+
+.description h2:hover {
+  color: #00e699;
 }
 
 .description h4 {
@@ -8667,6 +8673,7 @@ form {
 
 .description p {
   margin-bottom: 30px;
+  font-size: 17px;
 }
 
 #top:hover .description {
@@ -8687,4 +8694,15 @@ form {
 #bottom:hover .description {
   visibility: visible;
   opacity: 1;
+}
+
+#logo {
+  height: 35px;
+  float: left;
+  margin-top: 8px;
+  margin-right: 8px;
+}
+
+#friendbutton {
+  margin-top: 15px;
 }

@@ -5,6 +5,8 @@ angular
 PlaylistsShowController.$inject = ["YouTubePlayer", "$stateParams", "$state", "Playlist", "$window", "socket", "API_URL", "$http"];
 function PlaylistsShowController(YouTubePlayer, $stateParams, $state, Playlist, $window, socket, API_URL, $http){
 
+  console.log(YouTubePlayer);
+
   var self                = this;
   self.playNext           = YouTubePlayer.playNext;
   self.playPrevious       = YouTubePlayer.playPrevious;

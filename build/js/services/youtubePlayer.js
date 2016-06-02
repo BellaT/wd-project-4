@@ -70,8 +70,8 @@ function YouTubePlayer($window) {
 
   self.createPlayer = function(){
     self.player = new YT.Player('player', {
-      height: '350',
-      width: '425',
+      height: '500',
+      width: '780',
       events: {
         'onReady': self.onReady,
         'onStateChange': self.onStateChange

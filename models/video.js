@@ -1,7 +1,8 @@
 var mongoose      = require("mongoose");
 
 var videoSchema = mongoose.Schema({
-  youtube_id: { type: String, required: true }
+  youtube_id: { type: String, required: true },
+  title: { type: String }
 });
 
 // Getter
