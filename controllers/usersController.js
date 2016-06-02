@@ -37,9 +37,18 @@ function usersDelete(req, res){
   });
 }
 
+function usersSearch(req, res){
+  User.find({name: { $regex : ".*" + req.body.value + ".*", $options: 'i' }}, function(err, users){
+    if (err) return res.status(500).json(err);
+    return res.status(200).json({users: users});
+  });
+}
+
+
 module.exports = {
   usersIndex:  usersIndex,
   usersShow:   usersShow,
   usersUpdate: usersUpdate,
-  usersDelete: usersDelete
+  usersDelete: usersDelete,
+  usersSearch: usersSearch
 };

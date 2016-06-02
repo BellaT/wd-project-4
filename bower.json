@@ -24,6 +24,7 @@
     "particles.js": "^2.0.0",
     "fullpage.js": "^2.8.0",
     "gsap": "^1.18.5",
-    "angular-ui-select": "^0.17.1"
+    "angular-ui-select": "^0.17.1",
+    "angular-sanitize": "^1.5.6"
   }
 }

@@ -2,15 +2,17 @@ angular
   .module("party")
   .controller("PlaylistsShowController", PlaylistsShowController);
 
-PlaylistsShowController.$inject = ["YouTubePlayer", "$stateParams", "$state", "Playlist", "$window", "socket"];
-function PlaylistsShowController(YouTubePlayer, $stateParams, $state, Playlist, $window, socket){
+PlaylistsShowController.$inject = ["YouTubePlayer", "$stateParams", "$state", "Playlist", "$window", "socket", "API_URL", "$http"];
+function PlaylistsShowController(YouTubePlayer, $stateParams, $state, Playlist, $window, socket, API_URL, $http){
 
-  var self            = this;
-  self.playNext       = YouTubePlayer.playNext;
-  self.playPrevious   = YouTubePlayer.playPrevious;
-  self.setVideos      = YouTubePlayer.setVideos;
-  self.deletePlaylist = deletePlaylist;
-  self.addVideo       = addVideo;
+  var self                = this;
+  self.playNext           = YouTubePlayer.playNext;
+  self.playPrevious       = YouTubePlayer.playPrevious;
+  self.setVideos          = YouTubePlayer.setVideos;
+  self.deletePlaylist     = deletePlaylist;
+  self.addVideo           = addVideo;
+  self.getUsers           = getUsers;
+  self.addUserToPlaylist  = addUserToPlaylist;
 
   Playlist.get($stateParams, function(data){
     self.playlist = data.playlist;
@@ -53,6 +55,20 @@ function PlaylistsShowController(YouTubePlayer, $stateParams, $state, Playlist, 
       };
       socket.emit("addVideo", socketData);
     });
+  }
+
+  function getUsers(value){
+    return $http.post(API_URL + '/users/search', {value: value})
+      .then(function(response) {
+        console.log(response.data.users);
+        return response.data.users.map(function(user){
+          return user.name;
+        });
+      });
+  }
+
+  function addUserToPlaylist(){
+
   }
 
 }

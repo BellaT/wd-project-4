@@ -10,6 +10,8 @@ var userSchema = mongoose.Schema({
   facebookId: String
 });
 
+userSchema.index({name: 'text'});
+
 userSchema.statics.encrypt = function(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };

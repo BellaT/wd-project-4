@@ -19,6 +19,10 @@ function User($resource, API_URL){
       'login': {
         url: API_URL + '/login',
         method: "POST"
+      },
+      'search': {
+        url: API_URL + '/users/search',
+        method: 'POST'
       }
     }
   );

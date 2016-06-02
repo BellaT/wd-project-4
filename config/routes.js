@@ -16,6 +16,9 @@ router.route('/users/:id')
   .patch(usersController.usersUpdate)
   .delete(usersController.usersDelete);
 
+router.route('/users/search')
+  .post(usersController.usersSearch);
+
 router.route("/playlists")
   .get(playlistsController.playlistsIndex)
   .post(playlistsController.playlistsCreate);
