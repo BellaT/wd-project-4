@@ -8486,6 +8486,14 @@ body {
   color: #00FFAA;
 }
 
+.btn.btn-default {
+  border: 2px solid #00FFAA;
+}
+
+.form-control {
+  border: 2px solid #00FFAA;
+}
+
 .homelinks {
   cursor: pointer;
 }
@@ -8505,6 +8513,10 @@ h3 {
 
 .navbar-default .navbar-nav > li > a {
   color: rgba(255, 255, 255, 0.8);
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+  color: #00FFAA;
 }
 
 .navbar-default .navbar-brand {

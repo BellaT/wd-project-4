@@ -30,17 +30,23 @@
   </div>
 
   <h4>Add friends to the playlist</h4>
-    <input type="text"
-          data-ng-model="playlistsShow.user.name"
-          placeholder="Select friend"
-          uib-typeahead="user for user in playlistsShow.getUsers($viewValue)" typeahead-loading="loadingFriends"
-          typeahead-no-results="noResults"
-          class="form-control">
-      <i ng-show="loadingFriends" class="glyphicon glyphicon-refresh"></i>
-      <div ng-show="noResults">
-        <i class="glyphicon glyphicon-remove"></i> No Results Found
-      </div>
-      <button type="submit" class="btn btn-default" ng-click="playlistsShow.addUserToPlaylist()">Add</button>
+  <div>
+    <form ng-submit="playlistsShow.addUserToPlaylist()">
+      <input type="text"
+            ng-model="playlistsShow.friend"
+            placeholder="Select friend"
+            uib-typeahead="user as user.name for user in playlistsShow.getUsers($viewValue)" typeahead-loading="loadingFriends"
+            typeahead-no-results="noResults"
+            typeahead-editable="false"
+            class="form-control">
+        <i ng-show="loadingFriends" class="glyphicon glyphicon-refresh"></i>
+        <div ng-show="noResults">
+          <i class="glyphicon glyphicon-remove"></i> No Results Found
+        </div>
+        <button type="submit" class="btn btn-default">Add</button>
+    </form>
+  </div>
+
 
   <h4>Delete Playlist</h4>
   <button type="delete" class="btn btn-default" ng-click="playlistsShow.deletePlaylist()">Delete</button>

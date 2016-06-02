@@ -3,21 +3,19 @@ var Video    = require("../models/video");
 
 function playlistsIndex(req, res, next){
   Playlist
-  .find({ user: req.user._id }, function(err, playlists){
+  .find({ $or: [{ owner: req.user._id }, { users: req.user._id }] }, function(err, playlists){
     if (err) return res.status(500).json({message: "Something went wrong."});
     return res.status(201).json({playlists: playlists});
   });
 }
 
-/*
- * user:
- */
 function playlistsCreate(req, res, next){
   var playlist  = new Playlist(req.body);
-  playlist.user = req.user;
+  playlist.owner = req.user;
+  playlist.users = [req.user];
 
   playlist.save(function(err, playlist){
-    console.log(err, playlist)
+    console.log(err, playlist);
     if (err) return res.status(500).json({message: "Something went wrong."});
     return res.status(201).json({playlist: playlist});
   });
@@ -34,7 +32,8 @@ function playlistsShow(req, res, next){
 
 function playlistsUpdate(req, res, next){
   var id = req.params.id;
-    Playlist.findByIdAndUpdate({ _id: id }, req.body.playlist, { new: true }, function(err, playlist){
+
+    Playlist.findByIdAndUpdate(id, req.body, { new: true }, function(err, playlist){
       if (err) return res.status(500).json(err);
       if (!playlist) return res.status(404).json(err);
       res.status(200).json({playlist: playlist});
@@ -61,12 +60,22 @@ function playlistsAddVideo(req, res, next){
 }
 
 function playlistsDelete(req, res, next){
+  console.log("PLAYLISTS DELETE");
   var id = req.params.id;
 
-  Playlist.remove({ _id: id}, function(err){
-    if (err) return res.status(500).json(err);
-    res.status(200).json();
+  Playlist.findById(id, function(err, playlist) {
+    console.log(playlist.owner, playlist._id);
+    if(playlist.owner !== playlist._id) return res.sendStatus(401);
+    playlist.remove(function(err){
+      if (err) return res.status(500).json(err);
+      res.status(200).json();
+    });
   });
+}
+
+function playlistsUsers(req, res, next){
+  var user = req.body;
+
 }
 
 module.exports = {

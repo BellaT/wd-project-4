@@ -72273,12 +72273,19 @@ angular
   .module("party")
   .controller("PlaylistsIndexController", PlaylistsIndexController);
 
-PlaylistsIndexController.$inject = ["Playlist"];
-function PlaylistsIndexController(Playlist){
+PlaylistsIndexController.$inject = ["Playlist", "CurrentUser"];
+function PlaylistsIndexController(Playlist, CurrentUser){
 
   var self = this;
   Playlist.query().$promise.then(function(data){
-    self.all = data.playlists;
+
+    self.myLists = data.playlists.filter(function(playlist) {
+      return playlist.owner === CurrentUser.getUser()._id;
+    });
+
+    self.friendsLists = data.playlists.filter(function(playlist) {
+      return playlist.owner !== CurrentUser.getUser()._id;
+    });
   });
 }
 
@@ -72360,15 +72367,13 @@ function PlaylistsShowController(YouTubePlayer, $stateParams, $state, Playlist, 
   function getUsers(value){
     return $http.post(API_URL + '/users/search', {value: value})
       .then(function(response) {
-        console.log(response.data.users);
-        return response.data.users.map(function(user){
-          return user.name;
-        });
+        return response.data.users;
       });
   }
 
-  function addUserToPlaylist(){
-
+  function addUserToPlaylist() {
+    self.playlist.users.push(self.friend._id);
+    return Playlist.update({ id: self.playlist._id }, self.playlist);
   }
 
 }

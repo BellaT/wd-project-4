@@ -2,11 +2,18 @@ angular
   .module("party")
   .controller("PlaylistsIndexController", PlaylistsIndexController);
 
-PlaylistsIndexController.$inject = ["Playlist"];
-function PlaylistsIndexController(Playlist){
+PlaylistsIndexController.$inject = ["Playlist", "CurrentUser"];
+function PlaylistsIndexController(Playlist, CurrentUser){
 
   var self = this;
   Playlist.query().$promise.then(function(data){
-    self.all = data.playlists;
+
+    self.myLists = data.playlists.filter(function(playlist) {
+      return playlist.owner === CurrentUser.getUser()._id;
+    });
+
+    self.friendsLists = data.playlists.filter(function(playlist) {
+      return playlist.owner !== CurrentUser.getUser()._id;
+    });
   });
 }

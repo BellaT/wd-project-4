@@ -22,10 +22,12 @@ router.route('/users/search')
 router.route("/playlists")
   .get(playlistsController.playlistsIndex)
   .post(playlistsController.playlistsCreate);
+  
 router.route("/playlists/:id")
   .get(playlistsController.playlistsShow)
   .put(playlistsController.playlistsUpdate)
   .delete(playlistsController.playlistsDelete);
+
 router.route("/playlists/:id/add")
   .put(playlistsController.playlistsAddVideo);
 
