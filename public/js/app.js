@@ -72317,6 +72317,7 @@ function PlaylistsShowController(YouTubePlayer, $stateParams, $state, Playlist, 
   var self                = this;
   self.playNext           = YouTubePlayer.playNext;
   self.playPrevious       = YouTubePlayer.playPrevious;
+  self.nextVideo          = {};
   self.setVideos          = YouTubePlayer.setVideos;
   self.deletePlaylist     = deletePlaylist;
   self.addVideo           = addVideo;
@@ -72327,6 +72328,7 @@ function PlaylistsShowController(YouTubePlayer, $stateParams, $state, Playlist, 
     self.playlist = data.playlist;
     self.videos   = mapVideos(data.playlist);
     YouTubePlayer.setVideos(self.videos);
+    self.nextVideo = YouTubePlayer.nextVideo;
   });
 
   socket.on('connect', function(socket) {
@@ -73688,6 +73690,7 @@ function YouTubePlayer($window) {
 
   self.setVideos = function(videosArray){
     self.videos = videosArray;
+    self.nextVideo = self.videos[self.current + 1];
   };
 
   self.currentlyPlaying = function(){

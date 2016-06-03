@@ -13,6 +13,7 @@ function YouTubePlayer($window) {
 
   self.setVideos = function(videosArray){
     self.videos = videosArray;
+    self.nextVideo = self.videos[self.current + 1];
   };
 
   self.currentlyPlaying = function(){

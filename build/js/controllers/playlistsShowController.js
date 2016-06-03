@@ -20,6 +20,7 @@ function PlaylistsShowController(YouTubePlayer, $stateParams, $state, Playlist, 
     self.playlist = data.playlist;
     self.videos   = mapVideos(data.playlist);
     YouTubePlayer.setVideos(self.videos);
+    self.nextVideo = YouTubePlayer.nextVideo;
   });
 
   socket.on('connect', function(socket) {
