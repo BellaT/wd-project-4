@@ -72317,7 +72317,6 @@ function PlaylistsShowController(YouTubePlayer, $stateParams, $state, Playlist, 
   var self                = this;
   self.playNext           = YouTubePlayer.playNext;
   self.playPrevious       = YouTubePlayer.playPrevious;
-  self.nextVideo          = {};
   self.setVideos          = YouTubePlayer.setVideos;
   self.deletePlaylist     = deletePlaylist;
   self.addVideo           = addVideo;

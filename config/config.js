@@ -1,6 +1,6 @@
 module.exports = {
   port: process.env.PORT || 3000,
-  databaseUrl: 'mongodb://localhost/party',
+  databaseUrl: process.env.MONGODB_URI || 'mongodb://localhost/party',
   secret: 'notVerySecret',
   appUrl: 'http://localhost:3000',
   oauth: {
