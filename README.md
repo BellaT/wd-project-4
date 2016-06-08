@@ -1,4 +1,4 @@
 ### Shindig
 
 ### Website
-http://shindigsharing.herokuapp.com
+https://shindigsharing.herokuapp.com
