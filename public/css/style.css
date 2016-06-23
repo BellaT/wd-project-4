@@ -8340,11 +8340,10 @@ form {
 #top {
   position: relative;
   padding: 0;
-}
-
-#top img {
-  width: 100%;
   height: 450px;
+  background-image: url("http://images.grabhouse.com/urbancocktail/wp-content/uploads/2015/03/Cover7.jpg");
+  background-size: cover;
+  background-position: center;
 }
 
 #middle-left {
