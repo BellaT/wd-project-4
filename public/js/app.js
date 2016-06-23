@@ -69238,7 +69238,7 @@ function Router($stateProvider, $locationProvider, $urlRouterProvider){
 
 angular
   .module('party')
-  .constant('API_URL', 'https://shindigsharing.herokuapp.com/api');
+  .constant('API_URL', window.location.origin + "/api");
 //changed the URL from localhost:3000
 
 angular
