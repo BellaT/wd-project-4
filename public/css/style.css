@@ -8416,7 +8416,7 @@ form {
   font-size: 17px;
 }
 
-#top .description {
+#top:hover .description {
   visibility: visible;
   opacity: 1;
 }
@@ -8445,4 +8445,25 @@ form {
 
 #friendbutton {
   margin-top: 15px;
+}
+
+@media only screen and (max-width: 750px) {
+  .description h4 {
+    font-size: 16px;
+  }
+  .description p {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .description h1 {
+    font-size: 28px;
+  }
+  .description h4 {
+    font-size: 16px;
+  }
+  .description p {
+    font-size: 12px;
+  }
 }
